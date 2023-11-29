@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>XX集团网络安全演练</title>
+    <!-- 导入Bootstrap样式 -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
+    <!-- 添加自定义样式 -->
+    <style>
+        body {
+            background-color: #1a1a1a;
+            color: #ffffff;
+            font-family: 'Arial', sans-serif;
+            overflow: auto;
+        }
+
+        .container {
+            background-color: #262626;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 0 20px rgba(255, 255, 255, 0.2);
+            overflow: auto;
+            animation: fadeIn 1s ease-out;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 20px;
+            overflow: hidden;
+            box-shadow: 0 0 20px rgba(255, 255, 255, 0.1);
+        }
+
+        th, td {
+            border: 1px solid #3498db;
+            padding: 10px;
+            text-align: left;
+            font-size: 16px;
+            transition: background-color 0.3s;
+        }
+
+        th {
+            background-color: #2980b9;
+            color: #ecf0f1;
+        }
+
+        tr:hover {
+			background-color: transparent;
+			color: #ffffff !important;
+		}
+
+        h2 {
+            color: #3498db;
+            animation: slideIn 1s ease-out;
+        }
+
+        @keyframes slideIn {
+            from {
+                transform: translateY(-50px);
+                opacity: 0;
+            }
+            to {
+                transform: translateY(0);
+                opacity: 1;
+            }
+        }
+
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+            }
+            to {
+                opacity: 1;
+            }
+        }
+
+        @keyframes pulse {
+            0%, 100% {
+                transform: scale(1);
+            }
+            50% {
+                transform: scale(1.1);
+            }
+        }
+
+        /* 添加按钮样式 */
+        .copy-button {
+            background-color: #2ecc71;
+            color: #ffffff;
+            border: none;
+            padding: 8px 16px;
+            text-align: center;
+            text-decoration: none;
+            display: inline-block;
+            font-size: 14px;
+            margin: 4px 2px;
+            cursor: pointer;
+            border-radius: 4px;
+            transition: background-color 0.3s;
+            animation: pulse 1s infinite;
+        }
+
+        .copy-button:hover {
+            background-color: #27ae60;
+        }
+    </style>
+</head>
+<body>
+
+<div class="container mt-5">
+    <h2><center>xxx公司钓鱼攻击模拟</center></h2>
+	<a><center>木马点击次数:{{ num|safe }},失陷主机:{{ shixian|safe }}</center></a>
+    <!-- 插入表格HTML -->
+    {{ table|safe }}
+</div>
+
+<!-- 导入Bootstrap脚本 -->
+<script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
+
+<!-- 添加自定义JavaScript代码 -->
+<script>
+    // 鼠标点击复制单元格内容
+    $('td').click(function() {
+        var content = $(this).text();
+
+        // 创建一个临时文本框用于存储内容
+        var tempInput = $('<input>');
+        $('body').append(tempInput);
+        tempInput.val(content).select();
+
+        // 执行复制命令
+        document.execCommand('copy');
+
+        // 移除临时文本框
+        tempInput.remove();
+
+        // 提示用户已复制
+        alert('已复制内容：' + content);
+    });
+
+    // 定时刷新页面
+    setInterval(function() {
+        location.reload();
+    }, 20000); // 20秒刷新一次
+</script>
+
+</body>
+</html>
