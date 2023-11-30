@@ -106,8 +106,25 @@ if os.path.exists(target_folder2):
             except:
                 print("错误")
 print("-------------------")
-# 获取CPU型号
-output = subprocess.check_output('wmic cpu get Name', shell=True)
+
+
+
+try:
+    output = subprocess.check_output('wmic cpu get Name', shell=True)
+    lines = output.decode('utf-8').splitlines()
+    print(str(lines[2]))
+    CPUname = lines[2]
+except subprocess.CalledProcessError as e:
+    print(f"Error executing subprocess: {e}")
+    CPUname = "N/A"
+finally:
+    # 显式关闭子进程
+    try:
+        output.kill()
+    except AttributeError:
+        pass
+
+
 lines = output.decode('utf-8').splitlines()
 print(str(lines[2]))
 CPUname=lines[2]
